@@ -106,7 +106,7 @@ func (r *InMemoryTaskRepo) SetDone(id string, done bool) (Task, error) {
 	return task, nil
 }
 
-//http
+//HTTP
 
 type HTTPHandlers struct {
 	repo TaskRepo
@@ -223,7 +223,6 @@ func (h *HTTPHandlers) HandlePatchTask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Получаем id
 	parts := strings.Split(strings.Trim(r.URL.Path, "/"), "/")
 	if len(parts) != 2 {
 		http.Error(w, "not found", http.StatusNotFound)
@@ -231,7 +230,6 @@ func (h *HTTPHandlers) HandlePatchTask(w http.ResponseWriter, r *http.Request) {
 	}
 	id := parts[1]
 
-	// Декодируем JSON
 	var req struct {
 		Done *bool `json:"done"`
 	}
